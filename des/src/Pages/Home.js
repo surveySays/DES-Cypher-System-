@@ -29,16 +29,36 @@ const Home = () => {
   });
   const [keysGenerated, setKeysGenerated] = React.useState(false);
   const [key, setKey] = React.useState("false");
+  const [keys, setKeys] = React.useState([
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   const checkKey = () => {
-    //check if key is only 1 or 0
-    //check to make sure key is 64 bits long
+    //TODO: Check input to make sure 64 bit and only 1 and 0
+    var myKeys = GenerateKeys();
 
-    GenerateKeys(key);
+    setKeys(myKeys);
+
+    setKeysGenerated(true);
   };
 
   const checkText = () => {
@@ -101,7 +121,7 @@ const Home = () => {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => setKeysGenerated(true)}
+                    onClick={checkKey}
                   >
                     Done
                   </Button>
@@ -109,9 +129,12 @@ const Home = () => {
               </form>
               <h3>16 48-bit Keys Generated</h3>
               <ul style={{ listStyle: "none", textAlign: "left", padding: 0 }}>
-                {keyItems}
+                {keys.map((key, index) => (
+                  <li>
+                    Key {index + 1}: {key}
+                  </li>
+                ))}
               </ul>
-
               {keysGenerated ? (
                 <div>
                   <h3>64-bit Text</h3>
@@ -214,7 +237,7 @@ const Home = () => {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => setKeysGenerated(true)}
+                    onClick={checkKey}
                   >
                     Done
                   </Button>
@@ -222,9 +245,12 @@ const Home = () => {
               </form>
               <h3>16 48-bit Keys Generated</h3>
               <ul style={{ listStyle: "none", textAlign: "left", padding: 0 }}>
-                {keyItems}
+                {keys.map((key, index) => (
+                  <li>
+                    Key {index + 1}: {key}
+                  </li>
+                ))}
               </ul>
-
               {keysGenerated ? (
                 <div>
                   <h3>64-bit Text</h3>
